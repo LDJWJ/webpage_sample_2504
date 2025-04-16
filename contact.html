@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - NEOGYM</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="logo">NEO<span>GYM</span></a>
+      <nav class="nav-menu">
+        <a href="index.html">HOME</a>
+        <a href="whyus.html">WHY US</a>
+        <a href="trainer.html">TRAINERS</a>
+        <a href="contact.html" class="active">CONTACT US</a>
+      </nav>
+      <div class="search-icon"><i class="fas fa-search"></i></div>
+    </div>
+  </header>
+
+  <section class="hero" style="height: 60vh;">
+    <div class="hero-content">
+      <h2 class="hero-title">Get in <span style="color:#ff5757">Touch</span></h2>
+      <p class="hero-text">Have questions or want to get started? We'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <section class="container" style="padding: 60px 20px;">
+    <form style="max-width: 600px; margin: 0 auto;">
+      <div style="margin-bottom: 20px;">
+        <label for="name" style="display: block; margin-bottom: 5px;">Name</label>
+        <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ccc;">
+      </div>
+      <div style="margin-bottom: 20px;">
+        <label for="email" style="display: block; margin-bottom: 5px;">Email</label>
+        <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ccc;">
+      </div>
+      <div style="margin-bottom: 20px;">
+        <label for="message" style="display: block; margin-bottom: 5px;">Message</label>
+        <textarea id="message" name="message" rows="6" required style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+      </div>
+      <button type="submit" class="btn" style="border: none;">Send Message</button>
+    </form>
+  </section>
+</body>
+</html>

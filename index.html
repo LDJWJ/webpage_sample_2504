@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEOGYM - Fitness Training</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">NEO<span>GYM</span></a>
+            <nav class="nav-menu">
+                <a href="index.html" class="active">HOME</a>
+                <a href="whyus.html">WHY US</a>
+                <a href="trainer.html">TRAINERS</a>
+                <a href="contact.html">CONTACT US</a>
+            </nav>
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h3 class="hero-subtitle">FITNESS</h3>
+            <h2 class="hero-title">TRAINING</h2>
+            <h1 class="hero-brand">NEOGYM</h1>
+            <p class="hero-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
+            </p>
+            <a href="contact.html" class="btn">CONTACT US</a>
+            <div class="slider-nav">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(20, 20, 20, 0.95)';
+                header.style.padding = '15px 0';
+            } else {
+                header.style.background = 'rgba(20, 20, 20, 0.9)';
+                header.style.padding = '20px 0';
+            }
+        });
+
+        const dots = document.querySelectorAll('.slider-dot');
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                dots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                // Add slider functionality here
+            });
+        });
+    </script>
+</body>
+</html>
