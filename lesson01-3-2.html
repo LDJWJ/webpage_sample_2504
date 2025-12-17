@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadoo - Travel Agency</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Volkhov:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DF6951',
+                        secondary: '#F1A501',
+                        dark: '#181E4B',
+                        light: '#5E6282',
+                        'light-bg': '#FFF1DA',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Volkhov', 'serif'],
+                    },
+                    boxShadow: {
+                        'card': '0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481)',
+                        'float': '0px 20px 35px rgba(0, 0, 0, 0.1)',
+                    },
+                    backgroundImage: {
+                        'decore': "url('https://raw.githubusercontent.com/aridsm/jadoo-landing-page/main/assets/img/Decore.png')", 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-img-blob {
+            z-index: -1;
+        }
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DF6951; 
+            border-radius: 4px;
+        }
+        .service-card:hover {
+            box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
+        }
+        .blob-bg {
+             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23DF6951' d='M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.3C93.5,8.6,82.2,21.4,70.6,31.4C59,41.4,47.1,48.6,35.7,54.7C24.3,60.8,13.4,65.8,1.4,63.4C-10.6,61,-23.7,51.2,-36.6,42.5C-49.5,33.8,-62.2,26.2,-69.5,15.2C-76.8,4.2,-78.7,-10.2,-73.2,-22.4C-67.7,-34.6,-54.8,-44.6,-42,-52.3C-29.2,-60,-16.5,-65.4,-2.4,-61.2C11.7,-57.1,23.4,-43.3,30.5,-83.6L44.7,-76.4Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+             background-repeat: no-repeat;
+             background-position: center;
+        }
+    </style>
+</head>
+<body class="font-sans text-light relative overflow-x-hidden">
+
+    <!-- Background Decore Top Right -->
+    <div class="absolute top-0 right-0 -z-10 w-[700px] h-[750px] opacity-20 hidden lg:block">
+        <svg viewBox="0 0 766 845" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.999718 0.499939C0.999718 0.499939 527.026 -56.3312 682.026 167.169C837.026 390.669 367.526 844.669 367.526 844.669" stroke="#FFF1DA" stroke-width="2"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M125.105 401.5C125.105 401.5 352.35 152.5 595.6 302C838.85 451.5 595.6 929.5 595.6 929.5C595.6 929.5 220.105 829.5 125.105 401.5Z" fill="#FFF1DA" fill-opacity="0.3"/>
+        </svg>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="container mx-auto px-6 py-8 flex justify-between items-center relative z-50">
+        <a href="#" class="text-3xl font-bold text-dark font-sans">Jadoo</a>
+        
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden text-dark text-2xl">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav id="nav-menu" class="hidden lg:flex flex-col lg:flex-row absolute lg:relative top-20 lg:top-0 left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-lg lg:shadow-none p-6 lg:p-0 gap-8 items-center rounded-lg lg:rounded-none z-50">
+            <a href="#" class="text-dark hover:text-primary transition">Destinations</a>
+            <a href="#" class="text-dark hover:text-primary transition">Hotels</a>
+            <a href="#" class="text-dark hover:text-primary transition">Flights</a>
+            <a href="#" class="text-dark hover:text-primary transition">Bookings</a>
+            <a href="#" class="text-dark font-medium hover:text-primary transition">Login</a>
+            <a href="#" class="border border-dark text-dark px-5 py-2 rounded-md hover:bg-dark hover:text-white transition">Sign up</a>
+            <div class="relative group">
+                <button class="flex items-center gap-1 text-dark">
+                    EN <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="absolute hidden group-hover:block bg-white shadow-md mt-2 py-2 rounded-md w-20 text-center">
+                    <a href="#" class="block px-4 py-1 hover:bg-gray-100 text-sm">EN</a>
+                    <a href="#" class="block px-4 py-1 hover:bg-gray-100 text-sm">FR</a>
+                    <a href="#" class="block px-4 py-1 hover:bg-gray-100 text-sm">ES</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 pt-4 pb-20 grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
+        <div class="space-y-6">
+            <h3 class="text-primary font-bold text-lg uppercase tracking-wide">Best Destinations around the world</h3>
+            <h1 class="text-dark font-serif font-bold text-5xl lg:text-7xl leading-tight">
+                Travel, enjoy and live a new and full life
+            </h1>
+            <p class="text-light leading-relaxed max-w-md">
+                Built Wicket longer admire do barton vanity itself do in it. Preferred to sportsmen it engrossed listening. Park gate sell they west hard for the.
+            </p>
+            <div class="flex flex-wrap items-center gap-6 pt-4">
+                <a href="#" class="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg hover:bg-yellow-500 transition font-medium">Find out more</a>
+                <button class="flex items-center gap-4 text-light group">
+                    <span class="bg-primary text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg group-hover:scale-110 transition">
+                        <i class="fas fa-play ml-1"></i>
+                    </span>
+                    <span class="font-medium text-light">Play Demo</span>
+                </button>
+            </div>
+        </div>
+        <div class="relative">
+            <!-- Hero Image -->
+             <div class="relative z-10">
+                 <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Traveler" class="w-full max-w-md mx-auto relative z-10 rounded-t-full rounded-b-3xl">
+             </div>
+             <!-- Decorative Blob behind -->
+             <div class="absolute top-10 right-0 lg:right-10 w-full h-full blob-bg bg-contain bg-no-repeat opacity-10 scale-150 z-0"></div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="container mx-auto px-6 py-20 relative">
+        <div class="text-center mb-16 space-y-2">
+            <h3 class="text-light font-medium uppercase tracking-wider">Category</h3>
+            <h2 class="text-dark font-serif font-bold text-4xl">We Offer Best Services</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Service 1 -->
+            <div class="service-card p-10 rounded-[36px] bg-white text-center group hover:scale-105 transition duration-300 relative z-10">
+                <div class="w-20 h-20 mx-auto mb-6 flex items-center justify-center relative">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Weather" class="h-16 object-contain">
+                    <div class="absolute bg-orange-100 w-12 h-12 rounded-tl-[10px] rounded-br-[10px] -z-10 -right-2 -top-2"></div>
+                </div>
+                <h4 class="text-dark font-bold text-xl mb-3">Calculated Weather</h4>
+                <p class="text-sm px-2">Built Wicket longer admire do barton vanity itself do in it.</p>
+            </div>
+
+            <!-- Service 2 (Highlighted) -->
+            <div class="service-card p-10 rounded-[36px] bg-white shadow-card text-center group hover:scale-105 transition duration-300 relative z-20">
+                <div class="absolute -bottom-8 -left-8 -z-10 hidden group-hover:block">
+                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 30C0 13.4315 13.4315 0 30 0H100V70C100 86.5685 86.5685 100 70 100H0V30Z" fill="#DF6951"/>
+                    </svg>
+                </div>
+                <div class="w-20 h-20 mx-auto mb-6 flex items-center justify-center relative">
+                    <img src="https://cdn-icons-png.flaticon.com/512/723/723955.png" alt="Flights" class="h-16 object-contain">
+                     <div class="absolute bg-orange-100 w-12 h-12 rounded-tl-[10px] rounded-br-[10px] -z-10 -right-4 -top-2"></div>
+                </div>
+                <h4 class="text-dark font-bold text-xl mb-3">Best Flights</h4>
+                <p class="text-sm px-2">Engrossed listening. Park gate sell they west hard for the.</p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card p-10 rounded-[36px] bg-white text-center group hover:scale-105 transition duration-300 relative z-10">
+                <div class="w-20 h-20 mx-auto mb-6 flex items-center justify-center relative">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163663.png" alt="Events" class="h-14 object-contain">
+                     <div class="absolute bg-orange-100 w-12 h-12 rounded-tl-[10px] rounded-br-[10px] -z-10 -right-2 -top-2"></div>
+                </div>
+                <h4 class="text-dark font-bold text-xl mb-3">Local Events</h4>
+                <p class="text-sm px-2">Barton vanity itself do in it. Preferd to men it engrossed listening.</p>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card p-10 rounded-[36px] bg-white text-center group hover:scale-105 transition duration-300 relative z-10">
+                <div class="w-20 h-20 mx-auto mb-6 flex items-center justify-center relative">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" alt="Customization" class="h-14 object-contain">
+                     <div class="absolute bg-orange-100 w-12 h-12 rounded-tl-[10px] rounded-br-[10px] -z-10 -right-2 -top-2"></div>
+                </div>
+                <h4 class="text-dark font-bold text-xl mb-3">Customization</h4>
+                <p class="text-sm px-2">We deliver outsourced aviation services for military customers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Destinations Section -->
+    <section class="container mx-auto px-6 py-20">
+        <div class="text-center mb-16 space-y-2">
+            <h3 class="text-light font-medium uppercase tracking-wider">Top Selling</h3>
+            <h2 class="text-dark font-serif font-bold text-4xl">Top Destinations</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-4">
+            <!-- Card 1 -->
+            <div class="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 bg-white group cursor-pointer">
+                <div class="h-80 overflow-hidden relative">
+                     <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rome" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4 text-light font-medium text-lg">
+                        <span>Rome, Italy</span>
+                        <span>$5.42k</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-light">
+                        <i class="fas fa-location-arrow text-black"></i>
+                        <span>10 Days Trip</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 bg-white group cursor-pointer">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="London" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4 text-light font-medium text-lg">
+                        <span>London, UK</span>
+                        <span>$4.2k</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-light">
+                        <i class="fas fa-location-arrow text-black"></i>
+                        <span>12 Days Trip</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 bg-white group cursor-pointer relative">
+                <div class="h-80 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Europe" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4 text-light font-medium text-lg">
+                        <span>Full Europe</span>
+                        <span>$15k</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-light">
+                        <i class="fas fa-location-arrow text-black"></i>
+                        <span>28 Days Trip</span>
+                    </div>
+                </div>
+                <!-- Spiral decore behind card -->
+                <div class="absolute -right-12 bottom-12 -z-10 w-24 h-24">
+                     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M98 10C98 10 90 40 50 40C10 40 10 10 50 10C90 10 90 70 50 70C10 70 10 40 50 40" stroke="#8A8A8A" stroke-width="2" stroke-dasharray="4 4"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Steps Section -->
+    <section class="container mx-auto px-6 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Left Side: Steps -->
+            <div class="space-y-8">
+                <div class="space-y-2">
+                    <h3 class="text-light font-medium uppercase tracking-wider">Easy and Fast</h3>
+                    <h2 class="text-dark font-serif font-bold text-4xl lg:text-5xl leading-tight">Book Your Next Trip<br>In 3 Easy Steps</h2>
+                </div>
+
+                <div class="space-y-8 mt-8">
+                    <!-- Step 1 -->
+                    <div class="flex items-start gap-6">
+                        <div class="min-w-[48px] h-12 rounded-xl bg-yellow-400 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-light font-bold text-lg mb-1">Choose Destination</h4>
+                            <p class="text-light text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus.</p>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex items-start gap-6">
+                        <div class="min-w-[48px] h-12 rounded-xl bg-orange-500 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-light font-bold text-lg mb-1">Make Payment</h4>
+                            <p class="text-light text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus.</p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex items-start gap-6">
+                        <div class="min-w-[48px] h-12 rounded-xl bg-teal-700 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-light font-bold text-lg mb-1">Reach Airport on Selected Date</h4>
+                            <p class="text-light text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Visual Card -->
+            <div class="relative flex justify-center lg:justify-end">
+                <!-- Shadow/Blur effect -->
+                <div class="absolute top-0 right-0 bg-blue-300 w-full h-full rounded-full blur-[100px] opacity-20 -z-10"></div>
+
+                <!-- Main Card -->
+                <div class="bg-white p-6 rounded-[26px] shadow-card w-full max-w-xs relative z-10 border border-gray-100">
+                    <div class="rounded-3xl overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1504893524553-bfa543881ca1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Greece" class="w-full h-40 object-cover">
+                    </div>
+                    <h4 class="text-dark font-bold text-lg mb-2">Trip To Greece</h4>
+                    <p class="text-light text-sm mb-4">14-29 June | by Robbin joseph</p>
+                    <div class="flex gap-4 mb-6">
+                        <span class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 text-sm"><i class="fas fa-leaf"></i></span>
+                        <span class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 text-sm"><i class="fas fa-map"></i></span>
+                        <span class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 text-sm"><i class="fas fa-paper-plane"></i></span>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <div class="flex items-center gap-2 text-light text-sm">
+                            <i class="fas fa-building"></i>
+                            <span>24 people going</span>
+                        </div>
+                        <i class="far fa-heart text-purple-500"></i>
+                    </div>
+                </div>
+
+                <!-- Floating Badge -->
+                <div class="bg-white p-4 rounded-2xl shadow-float absolute bottom-12 right-0 lg:-right-12 flex gap-4 items-start w-64 z-20 border border-gray-50">
+                    <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Rome Icon" class="w-12 h-12 rounded-full object-cover">
+                    <div class="flex-1">
+                        <p class="text-light text-xs mb-1">Ongoing</p>
+                        <h5 class="text-dark font-bold text-sm mb-2">Trip to Rome</h5>
+                        <p class="text-dark text-xs mb-1"><span class="text-primary font-bold">40%</span> completed</p>
+                        <div class="w-full bg-gray-100 rounded-full h-1.5">
+                            <div class="bg-primary h-1.5 rounded-full w-[40%]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="container mx-auto px-6 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <!-- Left Side -->
+            <div class="space-y-6">
+                <h3 class="text-light font-medium uppercase tracking-wider">Testimonials</h3>
+                <h2 class="text-dark font-serif font-bold text-4xl lg:text-5xl">What People Say<br>About Us.</h2>
+                <div class="flex gap-4 mt-12">
+                    <div class="w-3 h-3 rounded-full bg-dark cursor-pointer"></div>
+                    <div class="w-3 h-3 rounded-full bg-gray-300 cursor-pointer hover:bg-dark transition"></div>
+                    <div class="w-3 h-3 rounded-full bg-gray-300 cursor-pointer hover:bg-dark transition"></div>
+                </div>
+            </div>
+
+            <!-- Right Side: Review Card -->
+            <div class="relative py-10 px-4">
+                <!-- Card -->
+                <div class="bg-white rounded-[20px] p-8 shadow-card relative z-10 max-w-md mx-auto border border-gray-50">
+                    <div class="absolute -top-8 -left-8 w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Mike" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-light leading-relaxed mb-8 mt-4">
+                        "On the Windows talking painted pasture yet its express parties use. Sure last upon he same as knew next. Of believed or diverted no."
+                    </p>
+                    <h4 class="text-dark font-bold text-lg">Mike taylor</h4>
+                    <p class="text-light text-sm">Lahore, Pakistan</p>
+                </div>
+                
+                <!-- Background Card Stack Effect -->
+                <div class="bg-white rounded-[20px] p-8 shadow-sm absolute top-20 left-12 w-full max-w-md h-full -z-10 opacity-50 scale-95 border border-gray-100"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos Section -->
+    <section class="container mx-auto px-6 py-10">
+        <div class="flex flex-wrap justify-center lg:justify-between items-center gap-10 opacity-70 grayscale hover:grayscale-0 transition duration-500">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Axon_Logo.svg/1024px-Axon_Logo.svg.png" alt="Axon" class="h-8 md:h-10 object-contain mx-auto">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Jetstar_Airways_logo.svg/2560px-Jetstar_Airways_logo.svg.png" alt="Jetstar" class="h-8 md:h-10 object-contain mx-auto">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Expedia_2024_Logo.svg/2560px-Expedia_2024_Logo.svg.png" alt="Expedia" class="h-8 md:h-10 object-contain mx-auto">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Qantas_Airways_logo_2016.svg/2560px-Qantas_Airways_logo_2016.svg.png" alt="Qantas" class="h-8 md:h-10 object-contain mx-auto">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Alitalia_Logo_2017.svg/2560px-Alitalia_Logo_2017.svg.png" alt="Alitalia" class="h-6 md:h-7 object-contain mx-auto">
+        </div>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section class="container mx-auto px-6 py-20 relative">
+        <div class="bg-[#DFD7F9] bg-opacity-20 rounded-tl-[129px] rounded-3xl p-12 lg:p-24 relative overflow-hidden text-center">
+            
+            <!-- Background circles decorative -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full border-[20px] border-[#747DEF] opacity-10"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#747DEF] opacity-5 blur-[100px]"></div>
+            
+            <div class="relative z-10 max-w-3xl mx-auto space-y-12">
+                <h2 class="text-light font-serif font-bold text-2xl lg:text-4xl text-gray-600 leading-snug">
+                    Subscribe to get information, latest news and other interesting offers about Jadoo
+                </h2>
+                
+                <form class="flex flex-col md:flex-row gap-4 justify-center items-center max-w-lg mx-auto">
+                    <div class="relative w-full">
+                        <i class="far fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="email" placeholder="Your email" class="w-full pl-12 pr-4 py-4 rounded-xl border-none outline-none focus:ring-2 focus:ring-primary transition">
+                    </div>
+                    <button type="button" class="bg-gradient-to-r from-[#FF946D] to-[#FF7D68] text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition w-full md:w-auto">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+
+            <div class="absolute top-10 right-10 p-3 bg-gradient-to-tr from-purple-400 to-purple-600 rounded-full shadow-lg opacity-20 hidden lg:block">
+                <i class="fas fa-paper-plane text-white text-xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 pt-10 pb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+            <div class="lg:col-span-2 space-y-6">
+                <a href="#" class="text-4xl font-bold text-dark font-sans block mb-4">Jadoo.</a>
+                <p class="text-light text-sm max-w-xs">Book your trip in minute, get full Control for much longer.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-dark font-bold text-lg mb-6">Company</h4>
+                <ul class="space-y-3 text-light">
+                    <li><a href="#" class="hover:text-primary transition">About</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Mobile</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-dark font-bold text-lg mb-6">Contact</h4>
+                <ul class="space-y-3 text-light">
+                    <li><a href="#" class="hover:text-primary transition">Help/FAQ</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Press</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Affiliates</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-dark font-bold text-lg mb-6">More</h4>
+                <ul class="space-y-3 text-light">
+                    <li><a href="#" class="hover:text-primary transition">Airlinefees</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Airline</a></li>
+                    <li><a href="#" class="hover:text-primary transition">Low fare tips</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-gray-100">
+            <p class="text-light text-sm">All rights reserved@jadoo.co</p>
+            
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-dark hover:bg-gradient-to-tr hover:from-primary hover:to-secondary hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary text-white shadow-md flex items-center justify-center transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-dark hover:bg-gradient-to-tr hover:from-primary hover:to-secondary hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+                
+                <div class="flex gap-4">
+                     <button class="bg-black text-white px-4 py-2 rounded-full flex items-center gap-2 text-xs hover:opacity-80 transition">
+                         <i class="fab fa-google-play text-lg"></i>
+                         <div class="text-left">
+                             <div class="text-[0.6rem] uppercase">Get it on</div>
+                             <div class="font-bold">Google Play</div>
+                         </div>
+                     </button>
+                     <button class="bg-black text-white px-4 py-2 rounded-full flex items-center gap-2 text-xs hover:opacity-80 transition">
+                         <i class="fab fa-apple text-lg"></i>
+                         <div class="text-left">
+                             <div class="text-[0.6rem] uppercase">Available on the</div>
+                             <div class="font-bold">Apple Store</div>
+                         </div>
+                     </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+            navMenu.classList.toggle('flex');
+        });
+    </script>
+</body>
+</html>
