@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숏폼 제작 서비스 사용자 인터뷰 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* 사이드바 네비게이션 */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar h1 {
+            font-size: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .nav-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+        
+        .nav-item.active {
+            background: rgba(52, 152, 219, 0.3);
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+        
+        .nav-item.completed {
+            background: rgba(46, 204, 113, 0.2);
+            border-left-color: #2ecc71;
+        }
+        
+        .nav-number {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        
+        .nav-item.active .nav-number {
+            background: #3498db;
+        }
+        
+        .nav-item.completed .nav-number {
+            background: #2ecc71;
+        }
+        
+        /* 메인 콘텐츠 영역 */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-height: calc(100vh - 160px);
+        }
+        
+        /* 진행률 표시 */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            height: 4px;
+            background: #ecf0f1;
+            z-index: 1000;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db 0%, #2ecc71 100%);
+            transition: width 0.3s;
+        }
+        
+        /* 섹션 스타일 */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+            background: linear-gradient(120deg, #3498db 0%, #2ecc71 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            padding-left: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .intro-box {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .intro-box p {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #95a5a6;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .example {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 8px;
+            padding-left: 15px;
+        }
+        
+        .sub-question {
+            margin-top: 10px;
+            padding-left: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .sub-question::before {
+            content: "↳ ";
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .mission-box {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .mission-box h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+        
+        .link {
+            color: #3498db;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .link:hover {
+            text-decoration: underline;
+        }
+        
+        .meta-info {
+            background: #e8f4f8;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #0c5460;
+            margin-bottom: 15px;
+        }
+        
+        .closing-box {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .closing-box p {
+            color: #155724;
+            line-height: 1.8;
+        }
+        
+        /* 네비게이션 버튼 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #ecf0f1;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-prev {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn-prev:hover {
+            background: #7f8c8d;
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            color: white;
+        }
+        
+        .btn-next:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #27ae60 100%);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .progress-bar {
+                left: 0;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        /* 타이머 */
+        .timer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .timer-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 진행률 바 -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <!-- 사이드바 네비게이션 -->
+    <div class="sidebar">
+        <h1>📋 인터뷰 가이드</h1>
+        <div class="nav-item active" data-section="0">
+            <span class="nav-number">0</span>
+            인사 및 목적 안내
+        </div>
+        <div class="nav-item" data-section="1">
+            <span class="nav-number">1</span>
+            제작 맥락 이해 (5분)
+        </div>
+        <div class="nav-item" data-section="2">
+            <span class="nav-number">2</span>
+            시작하기 어려움 (7~8분)
+        </div>
+        <div class="nav-item" data-section="3">
+            <span class="nav-number">3</span>
+            MVP 사용 관찰
+        </div>
+        <div class="nav-item" data-section="4">
+            <span class="nav-number">4</span>
+            사용 경험 회고 (10분)
+        </div>
+        <div class="nav-item" data-section="5">
+            <span class="nav-number">5</span>
+            자막 & AI 기능 (8분)
+        </div>
+        <div class="nav-item" data-section="6">
+            <span class="nav-number">6</span>
+            니즈 검증 (5~6분)
+        </div>
+        <div class="nav-item" data-section="7">
+            <span class="nav-number">7</span>
+            마무리 질문 (3분)
+        </div>
+    </div>
+    
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
+        <div class="container">
+            <!-- 섹션 0: 인사 -->
+            <div class="section active" data-section="0">
+                <h2>0. 인사 및 인터뷰 목적 안내 (스크립트)</h2>
+                
+                <div class="intro-box">
+                    <p>안녕하세요. 오늘 인터뷰에 참여해주셔서 감사합니다.</p>
+                    
+                    <p>저희는 숏폼 제작자분들이 <strong>제작을 시작하고 완성하는 과정에서 어떤 점을 어렵게 느끼는지</strong>를 더 깊이 이해하고자 합니다.</p>
+                    
+                    <p>오늘 인터뷰에는 정답이 없고, 사용하시면서 느낀 <strong>솔직한 생각이나 불편함</strong>을 편하게 말씀해주시면 됩니다.</p>
+                    
+                    <p>인터뷰 내용은 리서치 목적 외에는 사용되지 않으며, 언제든 답변을 건너뛰셔도 괜찮습니다.</p>
+                    
+                    <p><em>(이외 아이스브레이킹은 인터뷰어의 재량으로 맡김.)</em></p>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevSection()" disabled>
+                        ← 이전
+                    </button>
+                    <button class="btn btn-next" onclick="nextSection()">
+                        다음 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- 섹션 1: 제작 맥락 이해 -->
+            <div class="section" data-section="1">
+                <h2>1. 제작 맥락 이해 (5분)</h2>
+                <div class="meta-info">
+                    <strong>[의도]</strong> 사용자의 기존 제작 루틴 파악
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">1. 평소 숏폼 영상은 어떤 목적으로 제작하시나요?</div>
+                    <div class="example">예시) 개인 일상 기록 / SNS 운영 / 브랜딩 / 업무용 등</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">2. 제작한 숏폼 영상의 주제는 주로 무엇이었나요?</div>
+                    <div class="example">예시) 일상, 브이로그 / 여행 / 패션, OOTD / 먹방 / 운동 / 지식 / 홍보 등</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">3. 평소 제작할 때 무슨 서비스나 앱을 사용하시나요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">4. 그 서비스에서 불편함을 느끼셨던 적이 있나요? 있다면 무엇인지 말씀해주세요</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">5. 반대로 그 서비스에서 좋다고 느꼈던 포인트가 있으셨나요? 그건 무엇이었나요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">6. 숏폼 제작은 얼마나 자주 하시나요?</div>
+                    <div class="example">예시) 주 1회 이상 / 월 몇 회 / 가끔 / 거의 안 함</div>
+                    <div class="sub-question">그러면 보통 숏폼을 하나 만드실 때 얼마나 걸리는 편이세요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">7. 숏폼 하나를 만들 때, 어떤 순서로 진행하시나요?</div>
+                    <div class="example">예시) 아이디어 → 촬영 → 편집 → 자막 → 업로드 등</div>
+                    <div class="sub-question">검증질문) 그 중 가장 오래 걸리는 단계는 어디였나요? (설문 때 기획 단계 선택한 사람 많았음)</div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevSection()">
+                        ← 이전
+                    </button>
+                    <button class="btn btn-next" onclick="nextSection()">
+                        다음 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- 섹션 2: 시작하기 어려움 -->
+            <div class="section" data-section="2">
+                <h2>2. "시작하기 어려움"에 대한 심층 탐색 (핵심) (7~8분)</h2>
+                <div class="meta-info">
+                    <strong>[의도]</strong> '편집 어려움' x '시작 장벽' 검증
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">1. 숏폼 제작을 망설이거나 미루게 되는 순간이 있었나요? 그 순간은 보통 언제인가요?</div>
+                    <div class="example">예시) 아이디어 단계 / 편집 시작 전 / 자막 작업 생각날 때 등</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">2. "숏폼 제작이 어렵다"고 느낄 때, 실제로 가장 부담되는 건 무엇인가요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">3. 다른 서비스의 템플릿을 사용해 영상을 제작해본 적이 있으신가요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">4. 얼마나 자주 사용하시나요?</div>
+                    <div class="sub-question">자주 사용 → 템플릿에서 불편하다고 느낀 점도 있으셨나요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">5. 자주 사용 → 템플릿을 고를때 고려하는 요소가 무엇인가요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">6. 템플릿을 고를 때 가장 고민되는 점은 무엇인가요?</div>
+                    <div class="example">예시) 너무 많음 / 내 상황에 맞는지 모르겠음 / 결과가 상상 안 됨 등</div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevSection()">
+                        ← 이전
+                    </button>
+                    <button class="btn btn-next" onclick="nextSection()">
+                        다음 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- 섹션 3: MVP 사용 관찰 -->
+            <div class="section" data-section="3">
+                <h2>3. MVP 사용 관찰</h2>
+                <div class="meta-info">
+                    온라인 인터뷰일 경우 zoom 화면 공유로 확인 or 휴대폰 화면 녹화 전달받기
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>서비스 링크:</strong></p>
+                    <p><a href="https://bright-first-bud.lovable.app/onboarding" class="link" target="_blank">https://bright-first-bud.lovable.app/onboarding</a></p>
+                </div>
+                
+                <div class="mission-box">
+                    <p>아래 링크는 <strong>템플릿을 추천받아 바로 숏폼 편집을 시작할 수 있는 서비스</strong>입니다.</p>
+                    
+                    <p>본 페이지는 아이디어 검증용 프로토타입이며, 어떤 정보도 저장되지 않으니 마음껏 눌러보셔도 좋습니다.</p>
+                    
+                    <h4>📌 미션:</h4>
+                    <p><strong>'라떼 맛집 소개 숏폼 영상'을 만든다고 가정하고,<br>
+                    추천받은 템플릿을 통해 숏폼 제작을 완료해 보세요!</strong></p>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevSection()">
+                        ← 이전
+                    </button>
+                    <button class="btn btn-next" onclick="nextSection()">
+                        다음 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- 섹션 4: 사용 경험 회고 -->
+            <div class="section" data-section="4">
+                <h2>4. MVP 사용 경험 회고 (시나리오 기반) (10분)</h2>
+                <div class="meta-info">
+                    <strong>[의도]</strong> 추천 UX의 이해도 & 신뢰도 파악
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">1. 처음 이 화면을 봤을 때, 가장 먼저 든 생각은 무엇이었나요?</div>
+                    <div class="example">(인터뷰이가 첫 화면 진입시 질문)</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">2. 주어진 미션을 수행하기까지 수월하다고 느끼셨나요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">3. 사용 중 잠깐 멈칫하거나 망설였던 순간이 있다면 언제였나요?</div>
+                    <div class="sub-question">그 이유가 무엇이었나요?</div>
+                    <div class="sub-question">그때 어떤 생각이 들었나요?</div>
+                    <div class="sub-question">망설이시다가 다시 감이 잡힌 순간이 있었나요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">4. 편집기를 사용하면서 가장 헷갈렸던 부분이 있었다면 무엇이었나요?</div>
+                    <div class="example">(앞 질문에서 답변이 편집기라고 말하면 굳이 질문x)</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">5. 템플릿 서비스를 사용하면서 앞으로 더 사용할 것 같다는 의향이 들었는지?</div>
+                    <div class="sub-question">아니라면, 템플릿 서비스에서 원하는 기능이 있는지?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">6. 이 서비스를 어떨 때 쓰면 유용하겠다는 생각이 드셨나요?</div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevSection()">
+                        ← 이전
+                    </button>
+                    <button class="btn btn-next" onclick="nextSection()">
+                        다음 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- 섹션 5: 자막 & AI 기능 -->
+            <div class="section" data-section="5">
+                <h2>5. 자막 & AI 기능에 대한 인식 심층 탐색 (8분)</h2>
+                <div class="meta-info">
+                    <strong>[의도]</strong> AI의 역할 정의 (대체 vs 보조)
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">1. 평소 숏폼 하나를 만들때 '자막 작업'은 오래 걸린다고 생각하시나요?</div>
+                    <div class="sub-question">보통 얼마나 걸리셨는지도 알고 계시는지? 모르겠다면 모른다고 대답해주시면 됩니다.</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">2. AI가 문구를 추천해주는 기능을 보면서 어떤 느낌이 들었나요?</div>
+                    <div class="example">예시) 기대 / 불안 / 편리 / 잘 모르겠음</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">3. 추천 문구를 선택할 때 어떤 생각을 하며 고르셨나요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">4. AI 문구가 바로 자막에 적용되는 방식은 어떻게 느껴졌나요?</div>
+                    <div class="sub-question">좋았던 점 / 불안했던 점</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">5. AI가 문구를 "대신 써주는 것"과 "초안을 주고 내가 고르는 것" 중, 어떤 쪽이 더 편하신가요?</div>
+                    <div class="sub-question">그 이유는 무엇인가요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">6. AI 문구 추천 화면이 있다면, 어떤 기능이 더 필요하신가요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">7. 숏폼 제작 시 음성(TTS 또는 내레이션)을 사용해본 경험이 있나요?</div>
+                    <div class="sub-question">음성(TTS/ 내레이션)을 사용할 때 주로 어떤 방식으로 제작하나요?</div>
+                    <div class="sub-question">TTS 또는 음성 편집 과정에서 불편하거나 아쉽다고 느낀 점이 있다면 무엇인가요?</div>
+                    <div class="sub-question">자막 문구를 입력하면 음성(TTS)이 함께 생성·수정되는 기능이 있다면, 사용해보고 싶으신가요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">8. 숏폼 완성후, 내보낼 때 플랫폼별 세이프존이 각각 다른 걸 알고 계셨나요?</div>
+                    <div class="sub-question">숏폼을 업로드한 후에, 인스타그램, 유튜브의 UI가 달라 얼굴이나 자막이 가려진 경험이 있나요?</div>
+                    <div class="sub-question">화면 가려짐 또는 잘림을 피하기 위해 보통 어떤 방법을 사용하시나요?</div>
+                    <div class="sub-question">어디에 업로드할건지 선택하면, 해당 플랫폼에서 가려질 수 있는 영역을 가이드로 표시해주는 '세이프존' 기능이 있다면 사용할 의향이 있으신가요?</div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevSection()">
+                        ← 이전
+                    </button>
+                    <button class="btn btn-next" onclick="nextSection()">
+                        다음 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- 섹션 6: 니즈 검증 -->
+            <div class="section" data-section="6">
+                <h2>6. 니즈 검증 (5~6분)</h2>
+                <div class="meta-info">
+                    <strong>[의도]</strong> 예방 UX의 실제 가치 확인
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">1. 이 서비스에서 전체적으로 느껴지는 감정은 무엇이라고 생각하시나요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">2. 이 서비스가 가장 도움이 될 것 같은 순간은 언제라고 느끼셨나요?</div>
+                    <div class="example">예시) 급하게 만들어야 할 때 / 아이디어가 없을 때 / 처음 만들어볼 때 / 간단한 영상 만들 때</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">3. 편집 과정에서 너무 필요했다 싶었던 기능이 있었다면 무엇이었나요?</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">4. 반대로, "이럴 때는 굳이 안 쓸 것 같다"라고 느껴지는 상황이 있다면 언제인가요?</div>
+                    <div class="example">예시) 긴 영상 만들 때 / 개성 있는 영상 만들 때 / 디테일한 편집 필요할 때</div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-number">5. 만약 이 서비스가 없어진다면, 가장 아쉬운 기능은 무엇일 것 같나요?</div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevSection()">
+                        ← 이전
+                    </button>
+                    <button class="btn btn-next" onclick="nextSection()">
+                        다음 →
+                    </button>
+                </div>
+            </div>
+
+            <!-- 섹션 7: 마무리 -->
+            <div class="section" data-section="7">
+                <h2>7. 마무리 질문 (3분)</h2>
+                
+                <div class="question">
+                    <div class="question-number">1. 오늘 사용해보시면서 불편했거나 이해가 안 됐던 부분이 있다면 자유롭게 말씀해주세요.</div>
+                </div>
+                
+                <div class="closing-box">
+                    <p><strong>오늘 귀중한 의견 정말 감사합니다.</strong></p>
+                    <p>말씀해주신 내용은 서비스 개선에 큰 도움이 될 것 같습니다.</p>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevSection()">
+                        ← 이전
+                    </button>
+                    <button class="btn btn-next" onclick="window.location.reload()">
+                        🔄 처음으로
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 타이머 (선택사항) -->
+    <div class="timer">
+        <div class="timer-label">경과 시간</div>
+        <div id="timerDisplay">00:00</div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        const totalSections = 8;
+        let startTime = Date.now();
+        let timerInterval;
+        
+        // 초기화
+        function init() {
+            updateProgress();
+            updateNavigation();
+            startTimer();
+        }
+        
+        // 섹션 이동
+        function goToSection(index) {
+            // 현재 섹션 비활성화
+            document.querySelector(`.section[data-section="${currentSection}"]`).classList.remove('active');
+            document.querySelector(`.nav-item[data-section="${currentSection}"]`).classList.remove('active');
+            
+            // 완료 표시
+            if (index > currentSection) {
+                document.querySelector(`.nav-item[data-section="${currentSection}"]`).classList.add('completed');
+            }
+            
+            // 새 섹션 활성화
+            currentSection = index;
+            document.querySelector(`.section[data-section="${currentSection}"]`).classList.add('active');
+            document.querySelector(`.nav-item[data-section="${currentSection}"]`).classList.add('active');
+            
+            // 스크롤 최상단으로
+            window.scrollTo(0, 0);
+            
+            updateProgress();
+            updateNavigation();
+        }
+        
+        // 다음 섹션
+        function nextSection() {
+            if (currentSection < totalSections - 1) {
+                goToSection(currentSection + 1);
+            }
+        }
+        
+        // 이전 섹션
+        function prevSection() {
+            if (currentSection > 0) {
+                goToSection(currentSection - 1);
+            }
+        }
+        
+        // 진행률 업데이트
+        function updateProgress() {
+            const progress = ((currentSection + 1) / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+        
+        // 네비게이션 버튼 상태 업데이트
+        function updateNavigation() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                const prevBtn = section.querySelector('.btn-prev');
+                const nextBtn = section.querySelector('.btn-next');
+                
+                if (prevBtn) {
+                    prevBtn.disabled = (index === 0);
+                }
+            });
+        }
+        
+        // 사이드바 네비게이션 클릭 이벤트
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const section = parseInt(this.getAttribute('data-section'));
+                goToSection(section);
+            });
+        });
+        
+        // 타이머
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                document.getElementById('timerDisplay').textContent = 
+                    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
+        }
+        
+        // 키보드 단축키
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                nextSection();
+            } else if (e.key === 'ArrowLeft') {
+                prevSection();
+            }
+        });
+        
+        // 초기화 실행
+        init();
+    </script>
+</body>
+</html>
