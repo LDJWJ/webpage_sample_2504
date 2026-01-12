@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!--
+  index.html
+
+  이 파일은 여행사 랜딩 페이지 예시를 위한 HTML 문서입니다.
+  요구사항:
+    - HTML5 시맨틱 태그 사용 (header, section, footer 등)
+    - 각 섹션은 명확하게 구분되어 있고 적절한 클래스명이 지정되어 있습니다.
+    - 코드 내 주석으로 구조를 설명하여 초보자도 이해할 수 있도록 합니다.
+    - 반응형 레이아웃을 위해 meta viewport 태그와 함께 CSS에서 미디어 쿼리를 사용합니다.
+-->
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jadoo - Travel Agency Landing Page</title>
+    <!-- 외부 스타일 시트를 연결합니다. -->
+    <link rel="stylesheet" href="styles_131.css" />
+  </head>
+  <body>
+    <!-- 헤더 영역: 로고, 내비게이션 메뉴, 로그인/회원가입 -->
+    <header class="site-header">
+      <div class="container header-container">
+        <div class="logo">
+          <!-- 실제 로고 대신 텍스트 사용 -->
+          <a href="#">Jadoo</a>
+        </div>
+        <nav class="navigation">
+          <ul>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#hotels">Hotels</a></li>
+            <li><a href="#flights">Flights</a></li>
+            <li><a href="#bookings">Bookings</a></li>
+          </ul>
+        </nav>
+        <div class="auth-buttons">
+          <a href="#login" class="btn link">Login</a>
+          <a href="#signup" class="btn primary">Sign up</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 히어로 섹션: 소개 문구와 CTA 버튼, 오른쪽에 이미지를 배치합니다. -->
+    <section class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-text">
+          <p class="subtitle">Best Destinations Around The World</p>
+          <h1 class="headline">
+            Travel, enjoy<br />
+            and live a new<br />
+            and full life
+          </h1>
+          <p class="description">
+            Built Wicket longer admire do barton vanity itself do in it. Preferred to
+            sportsmen it engrossed listening. Park gate sell they west hard for the.
+          </p>
+          <div class="hero-buttons">
+            <a href="#" class="btn primary">Find out more</a>
+            <a href="#" class="btn secondary">Play Demo</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <!-- 실제 여행자 이미지를 넣는 대신 플레이스홀더 이미지 사용 -->
+          <img
+            src="https://via.placeholder.com/450x450"
+            alt="Travel hero"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 서비스 섹션: 4개의 카드로 여행 서비스 설명 -->
+    <section class="services-section" id="services">
+      <div class="container services-container">
+        <p class="section-subtitle">CATEGORY</p>
+        <h2 class="section-title">We Offer Best Services</h2>
+        <div class="cards-grid">
+          <!-- 카드 1: Calculated Weather -->
+          <div class="card">
+            <div class="card-icon">
+              <img
+                src="https://via.placeholder.com/80"
+                alt="Calculated weather icon"
+              />
+            </div>
+            <h3 class="card-title">Calculated Weather</h3>
+            <p class="card-description">
+              Built Wicket longer admire do barton vanity itself do in it.
+              Preferred to men it engrossed listening.
+            </p>
+          </div>
+          <!-- 카드 2: Best Flights -->
+          <div class="card highlighted">
+            <div class="card-icon">
+              <img
+                src="https://via.placeholder.com/80"
+                alt="Best flights icon"
+              />
+            </div>
+            <h3 class="card-title">Best Flights</h3>
+            <p class="card-description">
+              Engrossed listening. Park gate sell they west hard for the.
+            </p>
+          </div>
+          <!-- 카드 3: Local Events -->
+          <div class="card">
+            <div class="card-icon">
+              <img
+                src="https://via.placeholder.com/80"
+                alt="Local events icon"
+              />
+            </div>
+            <h3 class="card-title">Local Events</h3>
+            <p class="card-description">
+              Barton vanity itself do in it. Preferred to men it engrossed listening.
+            </p>
+          </div>
+          <!-- 카드 4: Customization -->
+          <div class="card">
+            <div class="card-icon">
+              <img
+                src="https://via.placeholder.com/80"
+                alt="Customization icon"
+              />
+            </div>
+            <h3 class="card-title">Customization</h3>
+            <p class="card-description">
+              We deliver outsourced aviation services for military customers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Destinations 섹션: 인기 여행지 카드 3개 -->
+    <section class="destinations-section" id="destinations">
+      <div class="container destinations-container">
+        <p class="section-subtitle">Top Selling</p>
+        <h2 class="section-title">Top Destinations</h2>
+        <div class="cards-grid three-cards">
+          <!-- 여행지 카드 1: Rome, Italy -->
+          <div class="destination-card">
+            <div class="destination-image">
+              <img
+                src="https://via.placeholder.com/350x250"
+                alt="Rome, Italy"
+              />
+            </div>
+            <div class="destination-content">
+              <h3>Rome, Italy</h3>
+              <p class="price">$5.42k</p>
+              <p class="duration">10 Days Trip</p>
+            </div>
+          </div>
+          <!-- 여행지 카드 2: London, UK -->
+          <div class="destination-card">
+            <div class="destination-image">
+              <img
+                src="https://via.placeholder.com/350x250"
+                alt="London, UK"
+              />
+            </div>
+            <div class="destination-content">
+              <h3>London, UK</h3>
+              <p class="price">$4.2k</p>
+              <p class="duration">12 Days Trip</p>
+            </div>
+          </div>
+          <!-- 여행지 카드 3: Full Europe -->
+          <div class="destination-card">
+            <div class="destination-image">
+              <img
+                src="https://via.placeholder.com/350x250"
+                alt="Full Europe"
+              />
+            </div>
+            <div class="destination-content">
+              <h3>Full Europe</h3>
+              <p class="price">$15k</p>
+              <p class="duration">28 Days Trip</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Steps 섹션: 3단계 설명 + 오른쪽 예시 카드 -->
+    <section class="steps-section" id="steps">
+      <div class="container steps-container">
+        <div class="steps-text">
+          <p class="section-subtitle">Easy and Fast</p>
+          <h2 class="section-title">Book Your Next Trip In 3 Easy Steps</h2>
+          <ol class="steps-list">
+            <li>
+              <span class="step-number">1</span>
+              <div>
+                <h3>Choose Destination</h3>
+                <p>Pick your dream destination from our wide selection of places.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-number">2</span>
+              <div>
+                <h3>Make Payment</h3>
+                <p>Complete your booking by making payment securely.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-number">3</span>
+              <div>
+                <h3>Reach Airport on Selected Date</h3>
+                <p>Arrive at the airport with your luggage and travel documents.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <!-- 오른쪽 예시 카드 -->
+        <div class="steps-card">
+          <img
+            src="https://via.placeholder.com/350x250"
+            alt="Trip to Greece"
+            class="steps-card-image"
+          />
+          <div class="steps-card-body">
+            <h4 class="steps-card-title">Trip To Greece</h4>
+            <p class="steps-card-date">14-29 June by Robin Hood</p>
+            <p class="steps-card-status">
+              Trip to Rome <span class="status-completed">40% completed</span>
+            </p>
+            <p class="steps-card-people">24 people going</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials 섹션: 사용자 후기 -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="container testimonials-container">
+        <div class="testimonials-header">
+          <p class="section-subtitle">Testimonials</p>
+          <h2 class="section-title">What People Say About Us.</h2>
+        </div>
+        <!-- 두 개의 후기 카드 예시 -->
+        <div class="testimonials-cards">
+          <div class="testimonial-card">
+            <div class="testimonial-profile">
+              <img
+                src="https://via.placeholder.com/64"
+                alt="Customer profile"
+              />
+              <div>
+                <p class="testimonial-name">Mike Taylor</p>
+                <p class="testimonial-location">Lahore, Pakistan</p>
+              </div>
+            </div>
+            <p class="testimonial-text">
+              “On the Windows talking painted pasture yet its express parties use.
+              Sure last upon he same as knew next. Of believed or diverted no.”
+            </p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-profile">
+              <img
+                src="https://via.placeholder.com/64"
+                alt="Customer profile"
+              />
+              <div>
+                <p class="testimonial-name">Chris Thomas</p>
+                <p class="testimonial-location">CEO of Red Button</p>
+              </div>
+            </div>
+            <p class="testimonial-text">
+              “The Windows talking painted pasture yet its express parties use. Sure
+              last upon he same as knew next.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 파트너 로고 섹션 -->
+    <section class="partners-section">
+      <div class="container partners-container">
+        <div class="partner-logos">
+          <!-- 실제 로고 대신 플레이스홀더 텍스트 또는 이미지 사용 -->
+          <img
+            src="https://via.placeholder.com/100x50?text=Axon"
+            alt="Axon logo"
+          />
+          <img
+            src="https://via.placeholder.com/100x50?text=Jetstar"
+            alt="Jetstar logo"
+          />
+          <img
+            src="https://via.placeholder.com/100x50?text=Expedia"
+            alt="Expedia logo"
+          />
+          <img
+            src="https://via.placeholder.com/100x50?text=Qantas"
+            alt="Qantas logo"
+          />
+          <img
+            src="https://via.placeholder.com/100x50?text=Alitalia"
+            alt="Alitalia logo"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 뉴스레터 섹션: 구독 폼 -->
+    <section class="newsletter-section">
+      <div class="container newsletter-container">
+        <h2 class="newsletter-title">
+          Subscribe to get information, latest news and other interesting offers about
+          Jadoo
+        </h2>
+        <form class="newsletter-form">
+          <input
+            type="email"
+            placeholder="Your email"
+            aria-label="Email address"
+          />
+          <button type="submit" class="btn primary">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 푸터 섹션 -->
+    <footer class="site-footer">
+      <div class="container footer-container">
+        <div class="footer-column brand">
+          <h3>Jadoo.</h3>
+          <p>
+            Book your trip in minute, get full control for much longer.
+          </p>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#mobile">Mobile</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#help">Help/FAQ</a></li>
+            <li><a href="#press">Press</a></li>
+            <li><a href="#affiliates">Affiliates</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>More</h4>
+          <ul>
+            <li><a href="#airlinefees">Airlinefees</a></li>
+            <li><a href="#airline">Airline</a></li>
+            <li><a href="#low-fare">Low fare tips</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container footer-bottom-container">
+          <p>All rights reserved &copy; jadoo.co</p>
+          <div class="footer-apps">
+            <a href="#app-store">
+              <img
+                src="https://via.placeholder.com/100x30?text=App+Store"
+                alt="App Store"
+              />
+            </a>
+            <a href="#play-store">
+              <img
+                src="https://via.placeholder.com/100x30?text=Google+Play"
+                alt="Google Play"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

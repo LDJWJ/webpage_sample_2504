@@ -1,0 +1,606 @@
+/*
+  styles.css
+
+  이 파일은 travel agency landing page의 스타일을 정의합니다.
+  전체적으로 밝고 부드러운 색상 팔레트를 사용하여 친근한 느낌을 전달합니다.
+  Flexbox와 CSS Grid를 활용하여 반응형 레이아웃을 구현합니다.
+  주석으로 각 섹션 스타일링의 목적을 설명합니다.
+*/
+
+/* 기본 색상 변수 설정 */
+:root {
+  --primary-color: #5f27cd; /* 버튼 및 강조 색상 */
+  --secondary-color: #f5f6fa; /* 배경 색상 */
+  --text-color: #2f3640; /* 기본 텍스트 색상 */
+  --accent-color: #fd7e14; /* 하이라이트 카드 색상 */
+  --light-gray: #e0e0e0;
+  --dark-gray: #7f8fa6;
+  --font-family: 'Arial', sans-serif;
+}
+
+/* 전체 기본 설정 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  /* 중앙 정렬 및 최대 폭 설정 */
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 공통 버튼 스타일 */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn.primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background-color: #4e1ead;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn.secondary:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.btn.link {
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+}
+
+/* 헤더 스타일 */
+.site-header {
+  background-color: #fff;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.navigation ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navigation a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navigation a:hover {
+  color: var(--primary-color);
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Hero 섹션 스타일 */
+.hero-section {
+  padding: 4rem 0;
+  background-color: var(--secondary-color);
+}
+
+.hero-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-text {
+  flex: 1 1 45%;
+}
+
+.subtitle {
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.headline {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.description {
+  margin-bottom: 1.5rem;
+  color: var(--dark-gray);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-image {
+  flex: 1 1 45%;
+  text-align: center;
+}
+
+.hero-image img {
+  border-radius: 20px;
+}
+
+/* Services 섹션 스타일 */
+.services-section {
+  padding: 4rem 0;
+  background-color: #fff;
+  text-align: center;
+}
+
+.services-container .section-subtitle {
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.services-container .section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cards-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  /* 카드가 한 줄로 꽉 차면 다음 줄로 넘어갑니다 */
+}
+
+.card {
+  background-color: var(--secondary-color);
+  padding: 2rem 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card.highlighted {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.card-icon img {
+  margin: 0 auto 1rem;
+  width: 60px;
+  height: 60px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+}
+
+.card.highlighted .card-description {
+  color: #f3eaff;
+}
+
+/* Destinations 섹션 스타일 */
+.destinations-section {
+  padding: 4rem 0;
+  background-color: var(--secondary-color);
+  text-align: center;
+}
+
+.destinations-container .section-subtitle {
+  color: var(--accent-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.destinations-container .section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.three-cards {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.destination-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.destination-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.destination-content {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.destination-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.destination-content .price {
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.destination-content .duration {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+}
+
+/* Steps 섹션 스타일 */
+.steps-section {
+  padding: 4rem 0;
+  background-color: #fff;
+}
+
+.steps-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+}
+
+.steps-text {
+  flex: 1 1 50%;
+}
+
+.steps-text .section-subtitle {
+  color: var(--accent-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.steps-text .section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.steps-list {
+  list-style: none;
+  counter-reset: step-counter;
+}
+
+.steps-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.step-number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.steps-list h3 {
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.steps-list p {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+}
+
+.steps-card {
+  flex: 1 1 40%;
+  background-color: var(--secondary-color);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.steps-card-image {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.steps-card-body {
+  padding: 1.5rem;
+}
+
+.steps-card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.steps-card-date,
+.steps-card-status,
+.steps-card-people {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.status-completed {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Testimonials 섹션 스타일 */
+.testimonials-section {
+  padding: 4rem 0;
+  background-color: var(--secondary-color);
+}
+
+.testimonials-header .section-subtitle {
+  color: var(--accent-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.testimonials-header .section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.testimonials-cards {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonial-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.testimonial-name {
+  font-weight: bold;
+}
+
+.testimonial-location {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+}
+
+.testimonial-text {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Partners 로고 섹션 스타일 */
+.partners-section {
+  padding: 3rem 0;
+  background-color: #fff;
+}
+
+.partner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+}
+
+.partner-logos img {
+  max-height: 50px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.partner-logos img:hover {
+  opacity: 1;
+}
+
+/* Newsletter 섹션 스타일 */
+.newsletter-section {
+  padding: 4rem 0;
+  background-color: var(--secondary-color);
+  text-align: center;
+}
+
+.newsletter-title {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.newsletter-form input[type='email'] {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--light-gray);
+  border-radius: 30px;
+  flex: 1 1 250px;
+  max-width: 350px;
+}
+
+.newsletter-form input[type='email']:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.newsletter-form button {
+  cursor: pointer;
+}
+
+/* Footer 섹션 스타일 */
+.site-footer {
+  background-color: #fff;
+  padding-top: 3rem;
+  border-top: 1px solid var(--light-gray);
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-column h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-column a {
+  color: var(--dark-gray);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: var(--primary-color);
+}
+
+.footer-column.brand h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.footer-column.brand p {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+}
+
+.footer-bottom {
+  background-color: var(--secondary-color);
+  padding: 1rem 0;
+  border-top: 1px solid var(--light-gray);
+}
+
+.footer-bottom-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-apps img {
+  max-height: 30px;
+}
+
+/* 미디어 쿼리: 작은 화면 (모바일)에서 레이아웃 조정 */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text,
+  .hero-image {
+    flex: 1 1 100%;
+  }
+
+  .steps-container {
+    flex-direction: column;
+  }
+
+  .steps-text,
+  .steps-card {
+    flex: 1 1 100%;
+  }
+
+  .footer-bottom-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
